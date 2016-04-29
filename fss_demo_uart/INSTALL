@@ -1,0 +1,46 @@
+1. Initialize git submodules:
+git submodule init
+git submodule update
+
+2. Compile and install gdsl:
+cd libs/gdsl-1.8
+./configure
+make -j 8
+sudo make install
+sudo ldconfig
+cd ../..
+
+3 Install libfdt and libpixman
+sudo apt-get install libfdt-dev libpixman-1-dev
+
+4 If you don't have Questasim 10.2 or it is NOT installed in /opt/EDA/mentor,
+modify the QUESTA_INCLUDE_PATH variable in the fli/compile.sh file to make it
+point to the directory where mti.h is
+
+5. Invoke the program's compilation script:
+./compile_all.sh
+
+6. Start QuestaSim by typing in a terminal:
+vsim -64 -do sim_start.do &
+
+7. On two separate terminals, start the two QEmu instances with, respectively,
+./start_qemu_A.sh
+./start_qemu_B.sh
+
+8. In each QEmu terminal, load the module with
+modprobe 8250
+
+9. Fire up a PicoCom terminal in each QEmu instance with
+picocom -b 115200 /dev/ttyS0
+
+10. Wait until PicoCom writes "Terminal ready"
+
+11. Start typing
+
+12. Enjoy!
+
+-- IF YOU ALSO WANT TO PLAY WITH THE KERNEL PATCH --
+(NOT necessary, the compiled kernel is already in bin/)
+
+1. Do your changes to kernel_patch and then recompile with
+./kernel_compile.sh
