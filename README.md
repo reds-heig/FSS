@@ -42,6 +42,8 @@ Another related project is [SimXMD](www.eecg.toronto.edu/~willenbe/simxmd), whic
 In the context of the project, two demos have been developed:
 - **fss_demo_uart**: starting from an UART HDL design downloaded from [OpenCores](http://opencores.org/), we have written its FLI interface and the software that allows it to communicate with two different Linux instances, simulating thus the communication of these two systems through their serial ports.
 - **fss_demo_reptar**: the [REPTAR board](https://reds.heig-vd.ch/en/rad/projects/reptar) is a research/educational board developed at the [REDS Institute](https://reds.heig-vd.ch). It contains, among other things, two FPGAs. We wanted to be able to simulate the standard design loaded on one of these FPGAs, which is normally used to control some peripherals (such as buttons and LEDs), both for development and for educational purposes. In this demo, the system allows to operate on the LEDs, firing up a particular pattern on a GUI simulator when the buttons in the GUI are pressed and switching off when the button are pressed once again.
+ 
+To compile and execute them, please refer to the INSTALL file present in each subdirectory.
 
 ## Copyright and license
 
