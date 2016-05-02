@@ -8,17 +8,18 @@ An example of its operation is shown in the figure below:
 ![alt tag](http://reds-data.heig-vd.ch/publications/fss_2016/uart_arch.png)
 Here we have a design, written in VHDL, comprising two interconnected UART ports. The design is simulated using QuestaSim. 
 
-Traditionally, debugging it requires writing a test bench, making assumptions on I/O, and then checking that these assumptions are satisfied by the given design.
+Traditionally, debugging the HDL requires writing a test bench, making assumptions on I/O, and then checking that these assumptions are satisfied by the given design. From the software side, instead, the code was developed according to a set of specifications listing the capabilities of the hardware counterpart and how to use them. Predictably, when the two parts are interconnected, the slightest mismatch with respect to the specifications will result in errors, crashes, and unexpected behavior in general. When this happens, figuring out what is not working properly --- but even before that, in which part (HDL design? Software? Interface? Specifications?) --- is an extremely hard task.
 
-With FSS, instead, the simulation can be driven directly by the *real* software part (in this case, the UART kernel's driver of the Linux distribution running inside the two QEmu instances).
+With FSS, instead, the simulation can be driven directly by the *real* software part (in the example, the UART kernel's driver of the Linux distribution running inside the two QEmu instances).
 
 This has several important **advantages**:
 - the designer of the HDL part does not have to "forecast" its interactions with the software parts (**saves time** and **avoids bugs in the interface**)
-- the HDL design is exposed to the real behaviour of the software, and not just to a set of specifications written on paper, easing the identification of the bugs (and, more importantly, where the bug lies, i.e., in the HDL design or in the software) (**tests are more meaningful**)
-- even more importantly, the designer has **full** visibility on the system while it is interacting with the software (control on the visualized information, signals can be altered or delayed at wish, ...)(**designer has total control on the simulation**)
+- the HDL design is exposed to the real behaviour of the software, and not just to a set of specifications written on paper, easing the identification of the bugs (**tests are more meaningful**)
+- even more importantly, the designer has **full** visibility on the system while it is interacting with the software, thus she has control on the visualized information, can alter or delay signals at wish, ... (**designer has total control on the simulation**)
 
-Running the simulation, as explained in the INSTALL file, gives the result depicted by the figure below.
+In the considered example, running the simulation as explained in the INSTALL file, gives the result depicted by the figure below.
 ![alt tag](http://reds-data.heig-vd.ch/publications/fss_2016/uart_sim.png)
+It can be seen that the whole execution path of the system is available to the disegner for debugging purposes, and she can freely interact with the simulation to alter it in real-time. This represents a huge advantage with respect to already-existing solutions, say, for instance, [ChipScope](http://www-mtl.mit.edu/Courses/6.111/labkit/chipscope.shtml), where the bitstream has to be altered to observe a specific set of signals, and these signals are not only non-modifiable, but also stored in a limited buffer (and therefore a precise trigger has to be found to avoid missing the interesting signal region).
 
 # Detailed description
 ## Context
