@@ -1,0 +1,1 @@
+common-obj-y += fss.o fss_qemu_common.o

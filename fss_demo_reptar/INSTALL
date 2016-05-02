@@ -1,0 +1,72 @@
+1. Initialize git submodules:
+git submodule init
+git submodule update
+
+2. Compile and install gdsl:
+cd libs/gdsl-1.8
+./configure
+make -j 8
+sudo make install
+sudo ldconfig
+cd ../..
+
+3. Install libfdt
+sudo apt-get install libfdt-dev
+
+4. If you don't have Questasim 10.2 or it is NOT installed in /opt/EDA/mentor,
+modify the QUESTA_INCLUDE_PATH variable in the scripts/compile_fli.sh file to
+make it point to the directory where mti.h is
+
+5. Configure qemu & install required lib
+sudo apt-get install libpixman-1-dev
+cd qemu
+./configure
+cd ..
+
+6. Invoke the program's compilation script:
+./compile_all.sh
+When compiling Buildroot, it will complain that the overlay is missing. Ignore
+this error (the overlay is computed afterwards).
+
+7. Start QuestaSim by typing in a terminal:
+vsim -64 &
+
+8. Create Questasim's library directory by typing in Questasim:
+vlib work
+
+9. Include Xilinx's libraries. You can compile the library in your local
+installation by typing:
+./compxlibgui
+in the directory <path_to_Xilinx_dir>/14.6/ISE_DS/ISE/bin/lin64
+To include it in Questasim, remember the path where the compiled files are put,
+then right-click in the leftmost column in Questasim (where libraries are
+listed) and select "New -> Library...".
+Install the libraries in the vhdl subdirectory (the path should be something
+like: <path_to_Xilinx_dir>/14.6/ISE_DS/ISE/vhdl/questasim/10.2_1/lin64/, we
+will refer to it as LIB_PATH below)
+by typing the following commands in Questasim:
+vmap simprim LIB_PATH/simprim
+vmap unimacro LIB_PATH/unimacro
+vmap unisim LIB_PATH/unisim
+vmap xilinxcorelib LIB_PATH/xilinxcorelib
+
+10. Quit Questasim. The procedure above does not have to be repeated for the
+normal FSS execution.
+
+11. Start Questasim and QTEmu with:
+./start_questa.sh
+
+12. When requested by Questasim, start QEmu by typing:
+./start_fss.sh
+
+13. Login in QEmu (username "root", no password) and load both the kernel driver
+and the userspace program with:
+cd ..
+insmod ./fss_driver.ko
+./leds &
+
+14. Start the simulation for a long-enough period of time (e.g., 10ms) by
+typing in Questasim:
+run 10ms
+
+15. Operate on the buttons in the GUI. The leds below should turn on and off.

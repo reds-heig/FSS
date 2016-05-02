@@ -1,0 +1,71 @@
+--------------------------------------------------------------------------------
+--
+--   FileName:         debounce.vhd
+--   Dependencies:     none
+--   Design Software:  Quartus II 32-bit Version 11.1 Build 173 SJ Full Version
+--
+--   HDL CODE IS PROVIDED "AS IS."  DIGI-KEY EXPRESSLY DISCLAIMS ANY
+--   WARRANTY OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT
+--   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+--   PARTICULAR PURPOSE, OR NON-INFRINGEMENT. IN NO EVENT SHALL DIGI-KEY
+--   BE LIABLE FOR ANY INCIDENTAL, SPECIAL, INDIRECT OR CONSEQUENTIAL
+--   DAMAGES, LOST PROFITS OR LOST DATA, HARM TO YOUR EQUIPMENT, COST OF
+--   PROCUREMENT OF SUBSTITUTE GOODS, TECHNOLOGY OR SERVICES, ANY CLAIMS
+--   BY THIRD PARTIES (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF),
+--   ANY CLAIMS FOR INDEMNITY OR CONTRIBUTION, OR OTHER SIMILAR COSTS.
+--
+--   Version History
+--   Version 1.0 3/26/2012 Scott Larson
+--     Initial Public Release
+---
+--    1.1  29.01.14  CVZ changed interface
+--------------------------------------------------------------------------------
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE ieee.std_logic_unsigned.all;
+
+ENTITY debounce IS
+  GENERIC(
+    counter_size  :  INTEGER := 3); --counter size (19 bits gives 10.5ms with 50MHz clock)
+  PORT(
+    clk_i       : in  std_logic;  --input clock
+    reset_i     : in  std_logic;  --input clock
+    button_i    : in  std_logic;  --input signal to be debounced
+    enable_i    : in  std_logic;    
+    result_o    : out std_logic); --debounced signal
+END debounce;
+
+ARCHITECTURE logic OF debounce IS
+  SIGNAL flipflops   : std_logic_vector(1 DOWNTO 0); --input flip flops
+  SIGNAL counter_set : std_logic;                    --sync reset to zero
+  SIGNAL counter_out : std_logic_vector(counter_size DOWNTO 0) := (OTHERS => '0'); --counter output
+BEGIN
+
+  counter_set <= flipflops(0) xor flipflops(1);   --determine when to start/reset counter
+  
+PROCESS(clk_i, reset_i)
+BEGIN
+    if reset_i='1' then
+        flipflops       <= (others=>'0');
+        counter_out     <= (OTHERS => '0');
+        result_o        <= '0';
+    elsif rising_edge(clk_i) then
+        flipflops(0) <= button_i;
+        flipflops(1) <= flipflops(0);        
+        If(counter_set = '1') THEN                  --reset counter because input is changing
+            counter_out <= (OTHERS => '0');
+        ELSIF(counter_out(counter_size) = '0') THEN --stable input time is not yet met
+            if enable_i='1' then -- only counts when the enable is actif
+                counter_out <= counter_out + 1;
+            end if;
+        ELSE                                        --stable input time is met
+            result_o <= flipflops(1);
+        END IF;    
+      
+    END IF;
+END PROCESS;
+
+
+
+END logic;
