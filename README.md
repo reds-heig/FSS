@@ -37,6 +37,7 @@ An attempt in this direction is represented by the [RABBITS project](http://tima
 Another related project is [SimXMD](www.eecg.toronto.edu/~willenbe/simxmd), which focuses on using [GDB](https://en.wikipedia.org/wiki/GNU_Debugger) to drive the simulation of a processor. This is similar to what we would like to achieve, but we would like to generalize the adopted approach by letting GDB (or QEmu, in our case) take control of the simulation and interact with it.
 
 ## The FSS Approach
+(under development!)
 
 ## Proposed demos
 In the context of the project, two demos have been developed:
