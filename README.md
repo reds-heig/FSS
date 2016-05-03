@@ -39,11 +39,11 @@ Another related project is [SimXMD](http://www.eecg.toronto.edu/~willenbe/simxmd
 
 ## The FSS Approach
 ModelSim/QuestaSim include a [Foreign Language Interface (FLI)](http://homepages.cae.wisc.edu/~ece554/new_website/ToolDoc/Modelsim_docs/docs/pdf/fli.pdf) that allows an external program to have visibility on an HDL simulation (and, partially, control it).
-While this library has been available since many years now, it has not been fully exploited, if we except some projects (e.g.,  [cocotb](https://github.com/potentialventures/cocotb)) using it to allow designing test benches in languages other then VHDL.
+While this interface has been available since many years now, it has not been fully exploited, if we except some projects (e.g.,  [cocotb](https://github.com/potentialventures/cocotb)) that use it to allow designing test benches in languages other then VHDL.
 
 We have used this API to interface the HDL simulation with an emulated machine running inside the [QEmu emulator](http://wiki.qemu.org/Main_Page), placing ourselves between the two and acting as middleman.
 
-In particular, we have modified QEmu to make it recognize a virtual peripheral (our FSS device) that communicates with the host machine via sockets. We then execute the FSS-FLI interface that puts itself on the other end of this communication channel and forwards the requests coming from the emulated machine to the simulator, interpreting the responses and forwarding them back to the machine.
+In particular, we have modified QEmu to make it recognize a virtual peripheral (our FSS device) that communicates with the host machine via sockets. The FSS-FLI interface puts itself on the other end of this communication channel and forwards the requests coming from the emulated machine to the simulator, interpreting the responses and forwarding them back to the machine. Using this technique, the emulated machine thinks it is communicating with the *real* hardware, hence the simulated HDL design receives the same data it would receive if it was running on a real FPGA.
 
 ## Proposed demos
 In the context of the project, two demos have been developed:
