@@ -29,23 +29,28 @@ In particular, it is not uncommon to see boards that couple an [ARM](https://en.
 
 While the above mentioned strategy allows for impressive performance gains, the complexity of the overall system increases greatly: not only programming the two parts requires different skills (and thus the development is usually performed by two separate teams), but also the interactions between them are not easily defined, tested, and debugged. This fact makes the boundary between them one of the most critical points in the system design.
 
-Despite well-defined best practices, the lack of appropriate tools makes it the norm to test the CPU software design using a set of test cases that are supposed to mimic the expected behavior of the FPGA, and at the same time test the FPGA on a test bench that should simulate all the possible interactions with the CPU part. As an extreme example of this practice, ARM was used to employ a VHDL simulation of Linux boot process to validate the design of new processors. These techniques are far from being the optimal solution, and involve a significant amount of duplicated work.
+Despite well-defined best practices, the lack of appropriate tools makes it the norm to test the CPU software design using a set of test cases that are supposed to mimic the expected behavior of the FPGA, and at the same time test the FPGA on a test bench that should simulate all the possible interactions with the CPU part. As an extreme example of this practice, ARM used to employ a VHDL simulation of Linux boot process to validate the design of new processors. These techniques are far from being the optimal solution, and involve a significant amount of duplicated work.
 
 We claim that, in the context of heterogeneous systems composed by a CPU and an FPGA, huge benefits arise from a complete co-simulation of the two parts. Indeed, such a simulation allows full visibility on the internals of the two systems during their interaction, making it possible to spot incongruencies, mistakes in the interface design, and business logic errors. Moreover, it allows to test both components while performing real interactions and operating on realistic data, instead of relying on made-up test benches.
 
 An attempt in this direction is represented by the [RABBITS project](http://tima.imag.fr/sls/research-projects/rabbits). This framework proposes a system-level simulation based on QEmu and [SystemC](https://en.wikipedia.org/wiki/SystemC). However, while the approach and the preliminary results are extremely interesting, the choice of SystemC as working language has a major impact upon the applicability of the methodologies. Indeed, while SystemC is still a promising technology, it is not yet supported by standard workflows adopted in industry.
 
-Another related project is [SimXMD](www.eecg.toronto.edu/~willenbe/simxmd), which focuses on using [GDB](https://en.wikipedia.org/wiki/GNU_Debugger) to drive the simulation of a processor. This is similar to what we would like to achieve, but we would like to generalize the adopted approach by letting GDB (or QEmu, in our case) take control of the simulation and interact with it.
+Another related project is [SimXMD](http://www.eecg.toronto.edu/~willenbe/simxmd/simxmd_index.htm), which focuses on using [GDB](https://en.wikipedia.org/wiki/GNU_Debugger) to drive the simulation of a processor. This is similar to what we would like to achieve, but we would like to generalize the adopted approach by letting GDB (or QEmu, in our case) take control of the simulation and interact with it.
 
 ## The FSS Approach
-(under development!)
+ModelSim/QuestaSim include a [Foreign Language Interface (FLI)](http://homepages.cae.wisc.edu/~ece554/new_website/ToolDoc/Modelsim_docs/docs/pdf/fli.pdf) that allows an external program to have visibility on an HDL simulation (and, partially, control it).
+While this library has been available since many years now, it has not been fully exploited, if we except some projects (e.g.,  [cocotb](https://github.com/potentialventures/cocotb)) using it to allow designing test benches in languages other then VHDL.
+
+We have used this API to interface the HDL simulation with an emulated machine running inside the [QEmu emulator](http://wiki.qemu.org/Main_Page), placing ourselves between the two and acting as middleman.
+
+In particular, we have modified QEmu to make it recognize a virtual peripheral (our FSS device) that communicates with the host machine via sockets. We then execute the FSS-FLI interface that puts itself on the other end of this communication channel and forwards the requests coming from the emulated machine to the simulator, interpreting the responses and forwarding them back to the machine.
 
 ## Proposed demos
 In the context of the project, two demos have been developed:
 - **fss_demo_uart**: starting from an UART HDL design downloaded from [OpenCores](http://opencores.org/), we have written its FLI interface and the software that allows it to communicate with two different Linux instances, simulating thus the communication of these two systems through their serial ports.
-- **fss_demo_reptar**: the [REPTAR board](https://reds.heig-vd.ch/en/rad/projects/reptar) is a research/educational board developed at the [REDS Institute](https://reds.heig-vd.ch). It contains, among other things, two FPGAs. We wanted to be able to simulate the standard design loaded on one of these FPGAs, which is normally used to control some peripherals (such as buttons and LEDs), both for development and for educational purposes. In this demo, the system allows to operate on the LEDs, firing up a particular pattern on a GUI simulator when the buttons in the GUI are pressed and switching off when the button are pressed once again.
+- **fss_demo_reptar**: the [REPTAR board](https://reds.heig-vd.ch/en/rad/projects/reptar) is a research/educational board developed at the [REDS Institute](https://reds.heig-vd.ch). It contains, among other things, two FPGAs. We wanted to be able to simulate the standard design loaded on one of these FPGAs, which is normally used to control some peripherals (such as buttons and LEDs), both for development and for educational purposes. We test this capability in this demo, by allowing the user to turn on some LEDs on a GUI using the buttons.
  
-To compile and execute them, please refer to the INSTALL file present in each subdirectory.
+To compile and execute these demos, please refer to the INSTALL file present in each subdirectory.
 
 ## Copyright and license
 
