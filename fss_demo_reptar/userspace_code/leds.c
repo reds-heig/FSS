@@ -1,8 +1,8 @@
 /*****************************************************************
- * leds - Userspace code for LED manipulation                    *
- *                                                               *
+ * leds - Userspace code for LED manipulation			 *
+ *								 *
  * FSS project - REDS Institute, HEIG-VD, Yverdon-les-Bains (CH) *
- *  A. Dassatti, A. Convers, R. Rigamonti, X. Ruppen -- 12.2015  *
+ *  A. Dassatti, A. Convers, R. Rigamonti, X. Ruppen -- 12.2015	 *
  *****************************************************************/
 
 #include <stdio.h>
@@ -17,12 +17,12 @@
 /* Turn all leds off */
 #define LEDS_OFF 0x100
 /* Turn leds on on an alternate pattern */
-#define LEDS_ON  0x1AA
+#define LEDS_ON	 0x1AA
 
 int main(void)
 {
     int fd;
-char buf;
+    char buf;
 
     uint16_t tmp = LEDS_OFF;
 
