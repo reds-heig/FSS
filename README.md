@@ -21,6 +21,16 @@ In the considered example, running the simulation (given in the *fss_demo_uart* 
 ![alt tag](http://reds-data.heig-vd.ch/publications/fss_2016/uart_sim.png)
 It can be seen that the whole execution path of the system is available to the designer for debugging purposes, and she can freely interact with the simulation to alter it in real-time. This represents a huge advantage with respect to already-existing solutions, say, for instance, [ChipScope](http://www-mtl.mit.edu/Courses/6.111/labkit/chipscope.shtml), where the bitstream has to be altered to observe a specific set of signals, and these signals are not only non-modifiable, but also stored in a limited buffer (and therefore a precise trigger has to be found to avoid missing the interesting signal region).
 
+The following videos show two examples of FSS in execution.
+
+**UART demo**
+
+[![Alt text](https://img.youtube.com/vi/gzDY31UFQJc/0.jpg)](https://www.youtube.com/watch?v=gzDY31UFQJc)
+
+**REPTAR demo**
+
+[![Alt text](https://img.youtube.com/vi/oXuow8M2FbI/0.jpg)](https://www.youtube.com/watch?v=oXuow8M2FbI)
+
 # Detailed description
 ## Context
 Modern electronic devices are often heterogeneous in nature. This is due to the limitations imposed by the current technology that prevent us from pushing the clock rates beyond a certain limit, and thus motivates us to step back from general purpose processors and specialize the architecture to best fit the problem at hand.
