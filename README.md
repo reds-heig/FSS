@@ -47,8 +47,8 @@ In particular, we have modified QEmu to make it recognize a virtual peripheral (
 
 ## Proposed demos
 In the context of the project, two demos have been developed:
-- **fss_demo_uart**: starting from an UART HDL design downloaded from [OpenCores](http://opencores.org/), we have written its FLI interface and the software that allows it to communicate with two different Linux instances, simulating thus the communication of these two systems through their serial ports.
-- **fss_demo_reptar**: the [REPTAR board](https://reds.heig-vd.ch/en/rad/projects/reptar) is a research/educational board developed at the [REDS Institute](https://reds.heig-vd.ch). It contains, among other things, two FPGAs. We wanted to be able to simulate the standard design loaded on one of these FPGAs, which is normally used to control some peripherals (such as buttons and LEDs), both for development and for educational purposes. We test this capability in this demo, by allowing the user to turn on some LEDs on a GUI using the buttons.
+- **fss_demo_uart**: starting from an UART HDL design downloaded from [OpenCores](http://opencores.org/), we have written its FLI interface and the software that allows it to communicate with two different Linux instances, simulating thus the communication of these two systems through their serial ports. Click [here](https://youtu.be/gzDY31UFQJc) to see a video of the system running a simulation.
+- **fss_demo_reptar**: the [REPTAR board](https://reds.heig-vd.ch/en/rad/projects/reptar) is a research/educational board developed at the [REDS Institute](https://reds.heig-vd.ch). It contains, among other things, two FPGAs. We wanted to be able to simulate the standard design loaded on one of these FPGAs, which is normally used to control some peripherals (such as buttons and LEDs), both for development and for educational purposes. We test this capability in this demo, by allowing the user to turn on some LEDs on a GUI using the buttons. Click [here](https://youtu.be/gzDY31UFQJc) to see a video of the system running a simulation.
  
 To compile and execute these demos, please refer to the INSTALL file present in each subdirectory.
 
