@@ -5,7 +5,7 @@ FSS - Full System Simulation
 FSS is a system, developed at the [REDS Institute](https://reds.heig-vd.ch), that interfaces [QEmu](http://www.qemu.org) (one of the most renowned machine emulators) with [ModelSim/QuestaSim](www.mentor.com/products/fv/modelsim), two standard multi-language [HDL](https://en.wikipedia.org/wiki/Hardware_description_language) simulation environments by [Mentor Graphics](www.mentor.com).
 
 An example of its operation is shown in the figure below:
-![UART architecture](http://reds-data.heig-vd.ch/publications/fss_2016/uart_arch.png)
+[![UART architecture](http://reds-data.heig-vd.ch/publications/fss_2016/uart_arch_preview.png)](http://reds-data.heig-vd.ch/publications/fss_2016/uart_arch.png)
 Here we have a design, written in VHDL, comprising two interconnected UART ports. The design is simulated using QuestaSim. 
 
 Traditionally, debugging the HDL requires writing a test bench, making assumptions on I/O, and then checking that these assumptions are satisfied by the given design. From the software side, instead, the code was developed according to a set of specifications listing the capabilities of the hardware counterpart and how to use them, and tested with a simulator that ideally matches these specifiecations. Predictably, when the two parts are interconnected, the slightest mismatch with respect to the specifications will result in errors, crashes, and unexpected behavior in general. When this happens, figuring out what is not working properly --- but even before that, in which part (HDL design? Software? Interface? Specifications?) --- is an extremely hard task. 
