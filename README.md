@@ -17,8 +17,7 @@ This has several important **advantages**:
 - the HDL design is exposed to the real behaviour of the software, and not just to a set of specifications written on paper, easing the identification of the bugs (**tests are more meaningful**)
 - even more importantly, the designer has **full** visibility on the system while it is interacting with the software, thus she has control on the visualized information, can alter or delay signals at wish, ... (**designer has total control on the simulation**)
 
-In the considered example, running the simulation (given in the *fss_demo_uart* subdirectory) as explained in the INSTALL file, gives the result depicted by the figure below.
-![alt tag](http://reds-data.heig-vd.ch/publications/fss_2016/uart_sim.png)
+In the considered example, running the simulation (given in the *fss_demo_uart* subdirectory) as explained in the INSTALL file, gives the result depicted by the [![alt tag](http://reds-data.heig-vd.ch/publications/fss_2016/uart_sim.png)](figure below).
 It can be seen that the whole execution path of the system is available to the designer for debugging purposes, and she can freely interact with the simulation to alter it in real-time. This represents a huge advantage with respect to already-existing solutions, say, for instance, [ChipScope](http://www-mtl.mit.edu/Courses/6.111/labkit/chipscope.shtml), where the bitstream has to be altered to observe a specific set of signals, and these signals are not only non-modifiable, but also stored in a limited buffer (and therefore a precise trigger has to be found to avoid missing the interesting signal region).
 
 The following video shows the UART demo in execution:
