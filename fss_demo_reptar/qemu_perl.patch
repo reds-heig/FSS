@@ -1,0 +1,22 @@
+From 5eb48810b0b29f21f818af3d85f4922cbb149ba5 Mon Sep 17 00:00:00 2001
+From: Yu-Hsi Chiang <arbuz.tw@gmail.com>
+Date: Wed, 4 Oct 2017 13:19:12 +0800
+Subject: [PATCH] Escape braces in regex.
+
+---
+ qemu/scripts/texi2pod.pl | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/qemu/scripts/texi2pod.pl b/qemu/scripts/texi2pod.pl
+index 94097fb0..8767662d 100755
+--- a/qemu/scripts/texi2pod.pl
++++ b/qemu/scripts/texi2pod.pl
+@@ -317,7 +317,7 @@
+  @columns = ();
+  for $column (split (/\s*\@tab\s*/, $1)) {
+      # @strong{...} is used a @headitem work-alike
+-     $column =~ s/^\@strong{(.*)}$/$1/;
++     $column =~ s/^\@strong\{(.*)\}$/$1/;
+      push @columns, $column;
+  }
+  $_ = "\n=item ".join (" : ", @columns)."\n";
