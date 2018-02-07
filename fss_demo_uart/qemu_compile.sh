@@ -14,7 +14,8 @@ cp qemu_patch/fss qemu/hw -r
 cp fli/fss_common.* qemu/hw/fss
 cp qemu_patch/versatilepb.c qemu/hw/arm
 cd qemu/
-./configure --target-list=arm-softmmu --disable-user --enable-sdl
+./configure --target-list=arm-softmmu --disable-user --enable-sdl --python=python2
+patch -l -p2 < ../qemu_perl.patch
 make -j 8
 mkdir -p ../bin
 cp arm-softmmu/qemu-system-arm ../bin/qemu_A
