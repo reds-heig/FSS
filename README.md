@@ -1,7 +1,7 @@
 !!! This project has been moved to GitLab !!!
 ============================================
 
-The FSS project has been moved to GitLab: [https://gitlab.com/reds-public/FSS](https://gitlab.com/reds-public/FSS).
+The FSS project has been moved to GitLab: [https://gitlab.com/reds-public/fss](https://gitlab.com/reds-public/fss).
 This repository will receive no further updates.
 
 FSS - Full System Simulation
