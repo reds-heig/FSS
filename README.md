@@ -1,3 +1,9 @@
+!!! The project has been moved to GitLab !!!
+============================================
+
+The FSS project has been moved to GitLab: [https://gitlab.com/reds-public/FSS](https://gitlab.com/reds-public/FSS).
+This repository will receive no further updates.
+
 FSS - Full System Simulation
 ============================
 
@@ -6,9 +12,9 @@ FSS is a system, developed at the [REDS Institute](https://reds.heig-vd.ch), tha
 
 An example of its operation is shown in the figure below:
 [![UART architecture](http://reds-data.heig-vd.ch/publications/fss_2016/uart_arch_preview.png)](http://reds-data.heig-vd.ch/publications/fss_2016/uart_arch.png)
-Here we have a design, written in VHDL, comprising two interconnected UART ports. The design is simulated using QuestaSim. 
+Here we have a design, written in VHDL, comprising two interconnected UART ports. The design is simulated using QuestaSim.
 
-Traditionally, debugging the HDL requires writing a test bench, making assumptions on I/O, and then checking that these assumptions are satisfied by the given design. From the software side, instead, the code was developed according to a set of specifications listing the capabilities of the hardware counterpart and how to use them, and tested with a simulator that ideally matches these specifiecations. Predictably, when the two parts are interconnected, the slightest mismatch with respect to the specifications will result in errors, crashes, and unexpected behavior in general. When this happens, figuring out what is not working properly --- but even before that, in which part (HDL design? Software? Interface? Specifications?) --- is an extremely hard task. 
+Traditionally, debugging the HDL requires writing a test bench, making assumptions on I/O, and then checking that these assumptions are satisfied by the given design. From the software side, instead, the code was developed according to a set of specifications listing the capabilities of the hardware counterpart and how to use them, and tested with a simulator that ideally matches these specifiecations. Predictably, when the two parts are interconnected, the slightest mismatch with respect to the specifications will result in errors, crashes, and unexpected behavior in general. When this happens, figuring out what is not working properly --- but even before that, in which part (HDL design? Software? Interface? Specifications?) --- is an extremely hard task.
 
 With FSS, instead, the simulation can be driven directly by the *real* software part (in the example, the UART kernel's driver of the Linux distribution running inside the two QEmu instances).
 
@@ -53,7 +59,7 @@ In particular, we have modified QEmu to make it recognize a virtual peripheral (
 In the context of the project, two demos have been developed:
 - **fss_demo_uart**: starting from an UART HDL design downloaded from [OpenCores](http://opencores.org/), we have written its FLI interface and the software that allows it to communicate with two different Linux instances, simulating thus the communication of these two systems through their serial ports. Click [here](https://youtu.be/gzDY31UFQJc) to see a video of the system running a simulation.
 - **fss_demo_reptar**: the [REPTAR board](https://reds.heig-vd.ch/en/rad/projects/reptar) is a research/educational board developed at the [REDS Institute](https://reds.heig-vd.ch). It contains, among other things, two FPGAs. We wanted to be able to simulate the standard design loaded on one of these FPGAs, which is normally used to control some peripherals (such as buttons and LEDs), both for development and for educational purposes. We test this capability in this demo, by allowing the user to turn on some LEDs on a GUI using the buttons. Click [here](https://youtu.be/oXuow8M2FbI) to see a video of the system running a simulation.
- 
+
 To compile and execute these demos, please refer to the INSTALL file present in each subdirectory.
 
 ## Copyright and license

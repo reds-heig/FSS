@@ -1,8 +1,0 @@
-[submodule "fss_demo_uart/qemu"]
-	path = fss_demo_uart/qemu
-	url = git://git.qemu.org/qemu.git
-	branch = stable-2.4
-[submodule "fss_demo_reptar/qemu"]
-	path = fss_demo_reptar/qemu
-	url = git://git.qemu.org/qemu.git
-	branch = stable-2.4
