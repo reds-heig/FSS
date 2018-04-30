@@ -1,4 +1,4 @@
-!!! The project has been moved to GitLab !!!
+!!! This project has been moved to GitLab !!!
 ============================================
 
 The FSS project has been moved to GitLab: [https://gitlab.com/reds-public/FSS](https://gitlab.com/reds-public/FSS).
